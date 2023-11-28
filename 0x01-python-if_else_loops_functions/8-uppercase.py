@@ -7,3 +7,4 @@ def uppercase(str):
             msg += '{}'.format(chr(ord(char) - 32))
         else:
             msg += char
+    print(msg)
