@@ -9,7 +9,7 @@ if __name__ == "__main__":
     if NA == 0:
         print("0 arguments.")
     elif NA == 1:
-        print("{} argument:".format(NA))
+        print("1 argument:")
     else:
         print("{} arguments:".format(NA))
     for i in range(1, NA):
