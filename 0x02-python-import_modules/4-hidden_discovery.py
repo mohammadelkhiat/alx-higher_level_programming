@@ -4,5 +4,5 @@ if __name__ == "__main__":
 
     lib = dir(hidden_4)
     for name in sorted(lib):
-        if not name.startswith(__):
+        if not name.startswith(_):
             print(name)
