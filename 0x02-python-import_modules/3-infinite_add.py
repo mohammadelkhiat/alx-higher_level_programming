@@ -4,5 +4,5 @@ if __name__ == "__main__":
 
     def addition_of_arguments():
         arguments = sys.argv[1:]
-        result = sum(int(arg) for arg in arguments)
+        result = sum(int(arg) for arg in sys.argv[1:])
         print(result)
