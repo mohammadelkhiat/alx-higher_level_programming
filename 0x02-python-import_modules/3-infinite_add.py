@@ -3,7 +3,5 @@ if __name__ == "__main__":
     import sys
 
     arguments = sys.argv[1:]
-    output = 1
-    for arg in sys.argv[1:]:
-        output +=int(arg)
-    print(output)
+    result = sum(int(arg) for arg in sys.argv[1:])
+    print(result)
