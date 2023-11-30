@@ -11,5 +11,5 @@ if __name__ == "__main__":
         print(f"{NA} argument")
     else NA > 1:
         print(f"{NA} argument")
-        for i in range(0, NA):
-            print(f"{i}: {sin}")
+    for i in range(0, NA):
+        print(f"{i}: {sin}")
