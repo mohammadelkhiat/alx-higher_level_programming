@@ -12,4 +12,4 @@ if __name__ == "__main__":
     else:
         print("{} arguments:".format(NA))
     for i in range(1, NA):
-        print("{}: {}".format(i, sin(i)))
+        print("{}: {}".format(i, sin[i]))
