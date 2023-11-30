@@ -11,5 +11,5 @@ if __name__ == "__main__":
         print("1 argument:")
     else:
         print(f"{NA} arguments:")
-    for i in range(1, NA):
+    for i in range(1, len(sin)):
         print("{}: {}".format(i, sin[i]))
