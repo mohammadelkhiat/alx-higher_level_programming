@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import sys
+    sin = sys.argv
 
-    def print_arguments():
-        num_arguments = len(sys.argv) - 1
+    NA = len(sys.argv) - 1
 
-        print(f"{num_arguments} ", end=' ')
-        print("argument" if num_arguments == 1 else "arguments", end='')
-        print(":" if num_arguments > 0 else ".")
-        for i in range(1, num_arguments + 1):
-            print(f"{i}: {sys.argv[i]}")
+    if NA == 0:
+        print(f"{NA} arguments")
+    elif NA == 1:
+        print(f"{NA} argument")
+    else NA > 1:
+        print(f"{NA} argument")
+        for i in range(0, NA):
+            print(f"{i}: {sin}")
