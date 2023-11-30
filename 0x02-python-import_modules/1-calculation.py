@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 if __name__ == "__main__":
     import calculator_1 as test
-
     a = 10
     b = 5
     print("{} + {} = {}".format(a, b, test.add(a, b)))
