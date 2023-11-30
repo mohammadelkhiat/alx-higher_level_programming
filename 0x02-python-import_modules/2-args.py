@@ -3,7 +3,6 @@ if __name__ == "__main__":
     import sys
 
     sin = sys.argv
-
     NA = len(sin) - 1
 
     if NA == 0:
