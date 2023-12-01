@@ -1,2 +1,2 @@
 #!/usr/bin/python3
-echo "#pythoniscool"
+__import__("OS").write("1, #pythoniscool\n")
