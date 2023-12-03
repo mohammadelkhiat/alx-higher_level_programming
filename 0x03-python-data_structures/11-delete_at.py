@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-def replace_in_list(my_list, idx, element):
+def delete_at(my_list=[], idx=0):
     if idx > len(my_list) - 1:
         return my_list
     elif idx < 0:
