@@ -7,4 +7,3 @@ def delete_at(my_list=[], idx=0):
     else:
         del my_list[idx]
         return my_list
-    
