@@ -1,4 +1,6 @@
 #include <Python.h>
+#include <stdio.h>
+#include <unistd.h>
 
 /**
  * print_python_bytes - Printing Bytes
