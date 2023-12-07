@@ -1,25 +1,25 @@
 #include <Python.h>
-#include <stdio.h>
-#include <unistd.h>
 
 /**
- * print_python_bytes - Printing Bytes
- * @p: parameter
- * Return: Void
-*/
-
+ * print_python_bytes - Print information about Python bytes object
+ * @p: PyObject representing a bytes object
+ */
 void print_python_bytes(PyObject *p)
 {
-	PyBytesObject *bytes = (PyBytesObject *)p;
+	if (!PyBytes_Check(p))
+	{
+		printf("[ERROR] Invalid Bytes Object\n");
+		return;
+	}
 
 	printf("[.] bytes object info\n");
-	printf("  size: %ld\n", Py_SIZE(bytes));
+	printf("  size: %ld\n", PyBytes_GET_SIZE(p));
 	printf("  trying string: %s\n", PyBytes_AsString(p));
 
 	printf("  first 10 bytes: ");
 	size_t i;
-
-	for (i = 0; i < Py_SIZE(bytes) && i < 10; ++i)
+	size_t size = PyBytes_GET_SIZE(p);
+	for (i = 0; i < size && i < 10; ++i)
 	{
 		printf("%02x ", (unsigned char)PyBytes_AS_STRING(p)[i]);
 	}
@@ -27,21 +27,23 @@ void print_python_bytes(PyObject *p)
 }
 
 /**
- * print_python_list - Printing List
- * @p: parameter
- * Return: Void
-*/
+ * print_python_list - Print information about Python list object
+ * @p: PyObject representing a list object
+ */
 void print_python_list(PyObject *p)
 {
-	PyListObject *list = (PyListObject *)p;
+	if (!PyList_Check(p))
+	{
+		printf("[ERROR] Not a Python List\n");
+		return;
+	}
 
 	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %ld\n", Py_SIZE(list));
-	printf("[*] Allocated = %ld\n", list->allocated);
+	printf("[*] Size of the Python List = %ld\n", PyList_GET_SIZE(p));
+	printf("[*] Allocated = %ld\n", ((PyListObject *)p)->allocated);
 
 	size_t i;
-
-	for (i = 0; i < Py_SIZE(list); ++i)
+	for (i = 0; i < PyList_GET_SIZE(p); ++i)
 	{
 		printf("Element %ld: ", i);
 		PyObject *element = PyList_GET_ITEM(p, i);
@@ -49,22 +51,12 @@ void print_python_list(PyObject *p)
 		if (PyBytes_Check(element))
 		{
 			print_python_bytes(element);
-		} else if (PyList_Check(element))
+		}
+		else if (PyList_Check(element) || PyTuple_Check(element))
 		{
 			print_python_list(element);
-		} else if (PyTuple_Check(element))
-		{
-			print_python_list(element);
-		} else if (PyFloat_Check(element))
-		{
-			printf("float\n");
-		} else if (PyLong_Check(element))
-		{
-			printf("int\n");
-		} else if (PyUnicode_Check(element))
-		{
-			printf("str\n");
-		} else
+		}
+		else
 		{
 			printf("[ERROR] Unsupported Type\n");
 		}
