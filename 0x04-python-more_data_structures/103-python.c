@@ -1,67 +1,49 @@
 #include <Python.h>
+#include <object.h>
+#include <listobject.h>
+#include <bytesobject.h>
 
-/**
- * print_python_bytes - Print information about Python bytes object
- * @p: PyObject representing a bytes object
- */
 void print_python_bytes(PyObject *p)
 {
+	long int size;
+	int i;
+	char *trying_str = NULL;
+
+	printf("[.] bytes object info\n");
 	if (!PyBytes_Check(p))
 	{
-		printf("[ERROR] Invalid Bytes Object\n");
+		printf("  [ERROR] Invalid Bytes Object\n");
 		return;
 	}
 
-	printf("[.] bytes object info\n");
-	printf("  size: %ld\n", PyBytes_GET_SIZE(p));
-	printf("  trying string: %s\n", PyBytes_AsString(p));
+	PyBytes_AsStringAndSize(p, &trying_str, &size);
 
-	printf("  first 10 bytes: ");
-	size_t i;
-	size_t size = PyBytes_GET_SIZE(p);
-	unsigned char *string_data = (unsigned char *)PyBytes_AsString(p);
-
-	for (i = 0; i < size && i < 10; ++i)
-	{
-		printf("%02x ", string_data[i]);
-	}
+	printf("  size: %li\n", size);
+	printf("  trying string: %s\n", trying_str);
+	if (size < 10)
+		printf("  first %li bytes:", size + 1);
+	else
+		printf("  first 10 bytes:");
+	for (i = 0; i <= size && i < 10; i++)
+		printf(" %02hhx", trying_str[i]);
 	printf("\n");
 }
 
-/**
- * print_python_list - Print information about Python list object
- * @p: PyObject representing a list object
- */
 void print_python_list(PyObject *p)
 {
-	if (!PyList_Check(p))
-	{
-		printf("[ERROR] Not a Python List\n");
-		return;
-	}
+        long int size = PyList_Size(p);
+        int i;
+        PyListObject *list = (PyListObject *)p;
+        const char *type;
 
-	printf("[*] Python list info\n");
-	printf("[*] Size of the Python List = %ld\n", PyList_GET_SIZE(p));
-	printf("[*] Allocated = %ld\n", ((PyListObject *)p)->allocated);
-
-	size_t i;
-
-	for (i = 0; i < PyList_GET_SIZE(p); ++i)
-	{
-		printf("Element %ld: ", i);
-		PyObject *element = PyList_GET_ITEM(p, i);
-
-		if (PyBytes_Check(element))
-		{
-			print_python_bytes(element);
-		}
-		else if (PyList_Check(element) || PyTuple_Check(element))
-		{
-			print_python_list(element);
-		}
-		else
-		{
-			printf("[ERROR] Unsupported Type\n");
-		}
-	}
+        printf("[*] Python list info\n");
+        printf("[*] Size of the Python List = %li\n", size);
+        printf("[*] Allocated = %li\n", list->allocated);
+        for (i = 0; i < size; i++)
+        {
+                type = (list->ob_item[i])->ob_type->tp_name;
+		printf("Element %i: %s\n", i, type);
+                if (!strcmp(type, "bytes"))
+                        print_python_bytes(list->ob_item[i]);
+        }
 }
