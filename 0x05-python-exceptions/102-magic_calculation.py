@@ -1,12 +1,9 @@
 def magic_calculation(a, b):
-    result = 0
-    for i in range(1, 3):
-        try:
-            if i > a:
-                raise Exception("Too far")
-            else:
-                result += a**b / i
-        except:
-            result = b + a
-            break
+    try:
+        result = 0
+        result = a ** b + 98
+    except TypeError:
+        result = None
+    except ZeroDivisionError:
+        result = None
     return result
