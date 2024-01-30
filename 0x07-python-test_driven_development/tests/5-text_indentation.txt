@@ -1,0 +1,65 @@
+#5-text_indentation.txt
+=======================
+Doctest for 5-text_indentation.py
+=================================
+
+
+All the tests are for the only function in the module which is `text_indentation` function
+
+
+	##First import the function
+	===========================
+
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+
+	##Typical cases:
+	===============
+
+>>> text_indentation("""Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere""")
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+<BLANKLINE>
+Quonam modo?
+<BLANKLINE>
+Utrum igitur tibi litteram videor an totas paginas commovere
+
+
+	##More spaces in between:
+	========================
+>>> text_indentation("hello, world.    how are you.")
+hello, world.
+<BLANKLINE>
+how are you.
+<BLANKLINE>
+
+
+	##Spaces in the beggening:
+	=========================
+>>> text_indentation("     hello, world.    how are you.")
+hello, world.
+<BLANKLINE>
+how are you.
+<BLANKLINE>
+
+
+	##Some characters:
+	=================
+>>> text_indentation(".?:")
+.
+<BLANKLINE>
+?
+<BLANKLINE>
+:
+<BLANKLINE>
+
+
+	##Other types passed:
+	====================
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+...
+TypeError: text must be a string
+
+
+

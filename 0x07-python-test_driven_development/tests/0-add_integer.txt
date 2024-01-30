@@ -1,0 +1,75 @@
+# 0-add_integer.txt
+===============================
+ How to Use 0-add_integer.py
+===============================
+
+This library is very simple, since it only has one function called
+``add_integer()``.
+
+Positive numbers
+================
+
+``add_integer()`` returns the addition of its arguments.
+
+::
+
+    >>> add_integer = __import__('0-add_integer').add_integer
+    >>> add_integer(2, 3)
+    5
+
+It also works with floating-point values.
+But the arguments will be casted to integers if they are float
+
+::
+
+    >>> add_integer(5.7, 9.3)
+    5
+
+    >>> add_integer(0.5, 5.2)
+    2
+
+Negative Numbers
+================
+
+It should works with negative numbers with no problem
+
+::
+
+    >>> add_integer(2.3, -4)
+    -2
+
+    >>> add_integer(2, -4)
+    -2
+
+Number of argument accepted
+===========================
+
+It can accept one argument <a> and <b> is assumed to be 98
+
+::
+
+    >>> add_integer(2)
+    100
+
+Exceptions
+==========
+
+a TypeError exception with the message `a must be an integer` or `b must be an integer`
+is raised if `a` or `b` are not integers or floats
+
+::
+
+    >>> add_integer(4, "School")
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
+
+    >>> add_integer(None)
+    Traceback (most recent call last):
+    ...
+    TypeError: a must be an integer
+
+    >>> add_integer(4, None)
+    Traceback (most recent call last):
+    ...
+    TypeError: b must be an integer
