@@ -13,8 +13,15 @@ if __name__ == "__main__":
         db=argv[3],
         charset="utf8",
     )
+    #	"SELECT cities.id, cities.name, states.name\
+    #			FROM cities LEFT JOIN states\
+    #			ON cities.state_id = states.id\
+    #			ORDER BY cities.id")
     cur = conn.cursor()
-    cur.execute("SELECT * FROM states ORDER BY cities.id ASC")
+    cur.execute("SELECT cities.id, cities.name, states.name\
+    			FROM cities LEFT JOIN states\
+    			ON cities.state_id = states.id\
+    			ORDER BY cities.id")
     query_rows = cur.fetchall()
     for row in query_rows:
         print(row)
