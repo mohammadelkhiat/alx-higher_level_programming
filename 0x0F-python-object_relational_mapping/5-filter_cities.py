@@ -14,13 +14,13 @@ if __name__ == "__main__":
         charset="utf8",
     )
     query = db.cursor()
-    query.execute(
-        "SELECT cities.name\
-            FROM cities LEFT JOIN states\
+    query.execute("\
+                SELECT cities.name\
+                FROM cities LEFT JOIN states\
                 ON cities.state_id = states.id\
-                    WHERE states.name = '{}'\
-                        ORDER BY cities.id".format(argv[4])
-    )
+                WHERE states.name = '{}'\
+                ORDER BY cities.id\
+                ".format(argv[4]))
 
     query_rows = query.fetchall()
     for row in query_rows:
