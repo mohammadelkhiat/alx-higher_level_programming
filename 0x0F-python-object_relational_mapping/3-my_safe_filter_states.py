@@ -15,7 +15,7 @@ if __name__ == "__main__":
     )
     query = db.cursor()
     query.execute(
-        "SELECT * FROM states WHERE name LIKE BINARY %s", (argv[4])
+        "SELECT * FROM states LIKE BINARY name = %s", (argv[4])
     )
 
     query_rows = query.fetchall()
