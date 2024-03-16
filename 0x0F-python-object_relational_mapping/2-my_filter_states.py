@@ -11,12 +11,11 @@ if __name__ == "__main__":
         user=argv[1],
         passwd=argv[2],
         db=argv[3],
-        state_name=argv[4]
         charset="utf8",
     )
     query = db.cursor()
     query.execute(
-        "SELECT * FROM states WHERE name LIKE BINARY '{}'".format(state_name)
+        "SELECT * FROM states WHERE name LIKE BINARY '{}'".format(argv[4])
     )
 
     query_rows = query.fetchall()
