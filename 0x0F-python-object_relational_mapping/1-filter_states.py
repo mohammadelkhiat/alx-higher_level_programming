@@ -4,23 +4,19 @@
 from sys import argv
 import MySQLdb
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     username = argv[1]
     password = argv[2]
-    db_name = argv[3]
-    db = MySQLdb.connect(host="localhost",
-                         port=3306,
-                         user=username,
-                         passwd=password,
-                         db=db_name)
-    cur = db.cursor()
-    cur.execute("SELECT states.id, name FROM states WHERE name "
-                "COLLATE latin1_general_cs "
-                "LIKE 'N%' "
-                "ORDER BY states.id ASC;")
-    rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    dbname = argv[3]
 
+    conn = MySQLdb.connect(host="localhost", port=3306, user=username,
+                           passwd=password, db=dbname, charset="utf8mb4")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM states\
+                WHERE name LIKE 'N_%' COLLATE utf8mb4_ja_0900_as_cs\
+                ORDER BY id")
+    query_rows = cur.fetchall()
+    for row in query_rows:
+        print(row)
     cur.close()
-    db.close()
+    conn.close()
