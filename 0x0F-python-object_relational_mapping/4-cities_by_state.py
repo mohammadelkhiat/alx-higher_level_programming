@@ -5,7 +5,7 @@ import MySQLdb
 from sys import argv
 
 if __name__ == "__main__":
-    conn = MySQLdb.connect(
+    db = MySQLdb.connect(
         host="localhost",
         port=3306,
         user=argv[1],
@@ -13,17 +13,16 @@ if __name__ == "__main__":
         db=argv[3],
         charset="utf8",
     )
-    #	"SELECT cities.id, cities.name, states.name\
-    #			FROM cities LEFT JOIN states\
-    #			ON cities.state_id = states.id\
-    #			ORDER BY cities.id")
-    cur = conn.cursor()
-    cur.execute("SELECT cities.id, cities.name, states.name\
-    			FROM cities LEFT JOIN states\
-    			ON cities.state_id = states.id\
-    			ORDER BY cities.id")
-    query_rows = cur.fetchall()
+    query = db.cursor()
+    query.execute(
+        "SELECT cities.id, cities.name, states.name\
+            FROM cities LEFT JOIN states\
+                ON cities.state_id = states.id\
+                    ORDER BY cities.id"
+    )
+
+    query_rows = query.fetchall()
     for row in query_rows:
         print(row)
-    cur.close()
-    conn.close()
+    query.close()
+    db.close()
